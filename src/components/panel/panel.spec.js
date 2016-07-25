@@ -1538,6 +1538,52 @@ describe('$mdPanel', function() {
         expect(panelCss.right).toEqual('0px');
       });
 
+      it('start in ltr', function() {
+        var start = '50px';
+        config['position'] = mdPanelPosition.absolute().start(start);
+
+        openPanel(config);
+
+        var panelCss = document.querySelector(PANEL_EL).style;
+        expect(panelCss.left).toEqual(start);
+      });
+
+      it('start in rtl', function() {
+        var start = '50px';
+        mdPanelPosition._isRTL = true;
+        config['position'] = mdPanelPosition.absolute().start(start);
+
+        openPanel(config);
+
+        var panelCss = document.querySelector(PANEL_EL).style;
+        expect(panelCss.right).toEqual(start);
+
+        mdPanelPosition._isRTL = false;
+      });
+
+      it('end in ltr', function() {
+        var end = '50px';
+        config['position'] = mdPanelPosition.absolute().end(end);
+
+        openPanel(config);
+
+        var panelCss = document.querySelector(PANEL_EL).style;
+        expect(panelCss.right).toEqual(end);
+      });
+
+      it('end in rtl', function() {
+        var end = '50px';
+        mdPanelPosition._isRTL = true;
+        config['position'] = mdPanelPosition.absolute().end(end);
+
+        openPanel(config);
+
+        var panelCss = document.querySelector(PANEL_EL).style;
+        expect(panelCss.left).toEqual(end);
+
+        mdPanelPosition._isRTL = false;
+      });
+
       it('center horizontally', function() {
         var position = mdPanelPosition.absolute().centerHorizontally();
         config['position'] = position;
